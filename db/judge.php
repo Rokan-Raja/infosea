@@ -1,0 +1,20 @@
+<?php
+include("connect.php");
+$name=$_POST['name'];
+$dept=$_POST['dept'];
+$event=$_POST['event'];
+$search="select *from judge_details where dept='$dept' and event_name='$event' and name='$name' and type='in'";
+$query=mysqli_query($con,$search);
+setcookie("event",$event,time()+360*60,"/");
+if(mysqli_num_rows($query)>0)
+{   
+    $row=mysqli_fetch_assoc($query);
+    $id=$row['id'];
+    setcookie("judge_id",$id,time()+360*60,"/");
+    echo"success";
+}
+else
+{
+    echo"";
+}
+?>
